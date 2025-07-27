@@ -43,7 +43,8 @@ class HealthMetric(models.Model):
     def save(self, *args, **kwargs):
         if self.height and self.weight:
             try:
-                self.bmi = round(self.weight / (self.height ** 2), 2)
+                height_m = self.height / 100
+                self.bmi = round(self.weight / (height_m ** 2), 2)
             except ZeroDivisionError:
                 self.bmi = None
         else:
